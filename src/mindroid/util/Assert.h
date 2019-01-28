@@ -14,8 +14,8 @@
  * limitations under the License.
  */
 
-#ifndef MINDROID_ASSERT_H_
-#define MINDROID_ASSERT_H_
+#ifndef ASSERT_H_
+#define ASSERT_H_
 
 #include <stdint.h>
 #include <stddef.h>
@@ -23,6 +23,53 @@
 #include "mindroid/lang/Object.h"
 
 namespace mindroid {
+
+#ifdef MINDROID_EXTERNAL_ASSERT_FUNCTION
+
+extern void mindroid_assert_func(bool condition, const char *filename, int lineno, const char *conditionAsStr);
+extern void mindroid_assert_func_with_msg(bool condition, const char *filename, int lineno, const char *msg, const char *conditionAsStr);
+
+#define ASSERT_TRUE(condition) \
+        mindroid_assert_func(condition, __FILE__, __LINE__, #condition)
+#define ASSERT_TRUE_WITH_MSG(msg, condition) \
+        mindroid_assert_func_with_msg(condition, __FILE__, __LINE__, msg, #condition)
+
+#define ASSERT_FALSE(condition) \
+        mindroid_assert_func(!condition, __FILE__, __LINE__, #condition)
+#define ASSERT_FALSE_WITH_MSG(msg, condition) \
+        mindroid_assert_func_with_msg(!condition, __FILE__, __LINE__, msg), #condition
+
+#define ASSERT_NULL(condition) \
+        mindroid_assert_func(condition == NULL, __FILE__, __LINE__, #condition)
+#define ASSERT_NULL_WITH_MSG(msg, condition) \
+        mindroid_assert_func_with_msg(condition == NULL, __FILE__, __LINE__, msg, #condition)
+
+#define ASSERT_NOT_NULL(condition) \
+        mindroid_assert_func(condition != NULL, __FILE__, __LINE__, #condition)
+#define ASSERT_NOT_NULL_WITH_MSG(msg, condition) \
+        mindroid_assert_func_with_msg(condition != NULL, __FILE__, __LINE__, msg, #condition)
+
+#define ASSERT_EQUALS(expected, actual) \
+        mindroid_assert_func(expected == actual, __FILE__, __LINE__, #expected "==" #actual)
+#define ASSERT_EQUALS_WITH_MSG(msg, expected, actual) \
+        mindroid_assert_func_with_msg(expected == actual, __FILE__, __LINE__, msg, #expected "==" #actual)
+
+#else 
+
+#define ASSERT_TRUE(condition) Assert::assertTrue(condition) 
+#define ASSERT_TRUE_WITH_MSG(msg, condition) Assert::assertTrue(msg, condition)
+
+#define ASSERT_FALSE(condition) Assert::assertFalse(condition)
+#define ASSERT_FALSE_WITH_MSG(msg, condition) Assert::assertFalse(msg, condition)
+
+#define ASSERT_NULL(condition) Assert::assertNull(condition) 
+#define ASSERT_NULL_WITH_MSG(msg, condition) Assert::assertNull(msg, condition)
+
+#define ASSERT_NOT_NULL(condition) Assert::assertNotNull(condition)
+#define ASSERT_NOT_NULL_WITH_MSG(msg, condition) Assert::assertNotNull(msg, condition)
+
+#define ASSERT_EQUALS(expected, actual) Assert::assertEquals(expected, actual)
+#define ASSERT_EQUALS_WITH_MSG(msg, expected, actual) Assert::assertEquals(msg, expected, actual);
 
 class Assert {
 public:
@@ -105,6 +152,8 @@ private:
     NO_COPY_CONSTRUCTOR_AND_ASSIGNMENT_OPERATOR(Assert)
 };
 
+#endif /* MINDROID_EXTERNAL_ASSERT_FUNCTION */
+
 } /* namespace mindroid */
 
-#endif /* MINDROID_ASSERT_H_ */
+#endif /* ASSERT_H_ */

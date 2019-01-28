@@ -27,7 +27,7 @@ namespace mindroid {
 
 Handler::Handler() {
     Looper* looper = Looper::myLooper();
-    Assert::assertNotNull(looper);
+    ASSERT_NOT_NULL(looper);
     mMessageQueue = &looper->myMessageQueue();
     mRunnableQueue = &looper->myRunnableQueue();
 }

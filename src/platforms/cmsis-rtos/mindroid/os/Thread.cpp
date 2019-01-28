@@ -52,7 +52,7 @@ void Thread::sleep(uint32_t milliseconds) {
 
 void Thread::join() const {
     bool notYetImplemented = true;
-    Assert::assertTrue(!notYetImplemented);
+    ASSERT_TRUE(!notYetImplemented);
 }
 
 void Thread::exec(const void* args) {

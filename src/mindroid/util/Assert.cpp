@@ -14,6 +14,8 @@
  * limitations under the License.
  */
 
+#ifndef MINDROID_EXTERNAL_ASSERT_FUNCTION
+
 #include "mindroid/util/Assert.h"
 #include "mindroid/util/Log.h"
 
@@ -120,3 +122,5 @@ void Assert::assertEquals(const char* message, void* expected, void* actual) {
 }
 
 } /* namespace mindroid */
+
+#endif /* MINDROID_EXTERNAL_ASSERT_FUNCTION */

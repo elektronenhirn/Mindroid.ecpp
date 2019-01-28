@@ -31,7 +31,7 @@ bool Lock::lock() {
 }
 
 void Lock::unlock() {
-    Assert::assertTrue(sCounter != 0);
+    ASSERT_TRUE(sCounter != 0);
 
     sCounter--;
     if (sCounter == 0) {

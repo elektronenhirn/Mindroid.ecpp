@@ -45,7 +45,7 @@ bool Looper::prepare() {
     Looper* looper = (Looper*) pthread_getspecific(sTlsKey);
     if (looper == NULL) {
         AutoLock autoLock;
-        Assert::assertTrue(sNumLoopers < MAX_NUM_LOOPERS);
+        ASSERT_TRUE(sNumLoopers < MAX_NUM_LOOPERS);
         int i = sNumLoopers;
         Looper* looper = reinterpret_cast<Looper*>(sLooperData + i * sizeof(Looper));
         new (looper) Looper();

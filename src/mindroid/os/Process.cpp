@@ -42,7 +42,7 @@ void Process::startService(Service& service) {
                 break;
             }
         }
-        Assert::assertTrue(id >= 0);
+        ASSERT_TRUE(id >= 0);
 
         if (mServices[id].service == NULL) {
             mServices[id].service = &service;
@@ -79,7 +79,7 @@ void Process::stopService(Service& service) {
                 break;
             }
         }
-        Assert::assertTrue((id >= 0) && (mServices[id].service != NULL));
+        ASSERT_TRUE((id >= 0) && (mServices[id].service != NULL));
 
         running = mServices[id].running;
         if (running) {
@@ -113,7 +113,7 @@ void Process::MainHandler::handleMessage(const Message& message) {
         if (!running) {
             Message& msg = mProcess.mMessages[id];
             removeMessage(msg);
-            Assert::assertNotNull(obtainMessage(msg, MainHandler::STOP_SERVICE));
+            ASSERT_NOT_NULL(obtainMessage(msg, MainHandler::STOP_SERVICE));
             msg.arg1 = id;
             msg.obj = &service;
             sendMessage(msg);
@@ -134,7 +134,7 @@ void Process::MainHandler::handleMessage(const Message& message) {
         if (running) {
             Message& msg = mProcess.mMessages[id];
             removeMessage(msg);
-            Assert::assertNotNull(obtainMessage(msg, MainHandler::START_SERVICE));
+            ASSERT_NOT_NULL(obtainMessage(msg, MainHandler::START_SERVICE));
             msg.arg1 = id;
             msg.obj = &service;
             sendMessage(msg);

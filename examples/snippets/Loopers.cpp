@@ -72,7 +72,7 @@ class Runnable1 : public Runnable {
 public:
     virtual void run() {
         Log::i(LOG_TAG, "Runnable1::run by Looper 0x%x", Looper::myLooper());
-        Assert::assertTrue(false);
+        ASSERT_TRUE(false);
     }
 };
 

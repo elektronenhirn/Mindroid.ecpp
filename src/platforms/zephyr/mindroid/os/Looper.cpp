@@ -44,7 +44,7 @@ bool Looper::prepare() {
     Looper* looper = NULL;
     {
         AutoLock autoLock;
-        Assert::assertTrue(sNumLoopers < MAX_NUM_LOOPERS);
+        ASSERT_TRUE(sNumLoopers < MAX_NUM_LOOPERS);
         if (i >= MAX_NUM_LOOPERS) {
             i = sNumLoopers;
         }
@@ -58,7 +58,7 @@ bool Looper::prepare() {
             return false;
         }
     }
-    Assert::assertTrue(looper != NULL);
+    ASSERT_TRUE(looper != NULL);
     new (looper) Looper();
     return true;
 }

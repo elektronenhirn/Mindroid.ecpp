@@ -53,8 +53,8 @@ public:
     }
 
     void setRange(size_t offset, size_t size) {
-        Assert::assertTrue(offset <= CAPACITY);
-        Assert::assertTrue(size <= CAPACITY);
+        ASSERT_TRUE(offset <= CAPACITY);
+        ASSERT_TRUE(size <= CAPACITY);
 
         mOffset = offset;
         mSize = size;

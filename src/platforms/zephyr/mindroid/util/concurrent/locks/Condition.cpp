@@ -33,7 +33,7 @@ void Condition::await() {
 
 void Condition::await(uint32_t timeout) {
     Lock::unlock();
-    Assert::assertTrue(timeout > 0);
+    ASSERT_TRUE(timeout > 0);
     mSemaphore.wait(timeout);
     Lock::lock();
 }
@@ -44,7 +44,7 @@ void Condition::signal() {
 
 void Condition::signalAll() {
     bool notYetImplemented = true;
-    Assert::assertTrue(!notYetImplemented);
+    ASSERT_TRUE(!notYetImplemented);
 }
 
 } /* namespace mindroid */
